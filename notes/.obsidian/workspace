@@ -1,0 +1,97 @@
+{
+  "main": {
+    "id": "5a8818e3f628666c",
+    "type": "split",
+    "children": [
+      {
+        "id": "ee0435189ea12c46",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Research.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "31947ae0fbc9160b",
+    "type": "split",
+    "children": [
+      {
+        "id": "fb9b01cef1059fb2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ea677b1cd029421b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "8376736538f36db0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6983526736b0b496",
+    "type": "split",
+    "children": [
+      {
+        "id": "8607aa7c0a753690",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "08aa4aa6981254ee",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Research.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "ee0435189ea12c46",
+  "lastOpenFiles": [
+    "Research.md",
+    "aria-live.md",
+    "Accessibility Research.md",
+    "VoiceOver.md",
+    "Untitled.md"
+  ]
+}
