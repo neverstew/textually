@@ -14,6 +14,17 @@ Use [[aria-live]] regions to wrap sections of the chat. There seems to be slight
 Use [skiplinks](https://webaim.org/techniques/skipnav/) to help users navigate.
 *come back to this.*
 
+## [Redesigning WhatsApp With Accessibility](https://saraelisaverona.com/ux-case-study-redesigning-whatsapp-with-accessibility)
+
+Small case study with some interesting feedback points directly from people.
+ 
+ > reimagine Whatsapp (for Android) group chats with improved accessibility for users aged 65+.
+
+![[whatsapp-accessibility-empathy-map.png]]
+
+- lots of being overwhelmed by interface or volume of messages
+- struggle to understand how to find someone to talk to
+- asks specific people for help
 
 ## Screen Readers
 On MacOS (where I'm developing), the built-in [[VoiceOver]] is the top one.

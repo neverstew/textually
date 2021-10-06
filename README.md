@@ -7,8 +7,27 @@ For those of you that use [Obsidian](https://obsidian.md/), you can open it
 as a vault and get nice links/rendering.
 
 # Day Log
+## 21/10/06
+Time Spent: 1.5hrs
+
+Decided to skip the gov.uk libraries. It'll introduce too much learning
+overhead and detract from me learning the a11y aspects that I'm doing this
+for.
+
+Spent some time looking at designs and frustrations with chat options at
+the moment. Narrowed down my target audience (see more in [notes](./notes/design/approach.md).
+
+Once that was clear and I have some simple boundaries for attempt one, I
+started to craft some simple [designs in figma](https://www.figma.com/file/ETyYKXLLLtQo9YWhn4aWfC/Design?node-id=3%3A18).
+
+## 21/10/05
+Time spent: 0
+
+Went to a board game cafe instead. Whoops!
+
 ## 21/10/04
 Time spent: 1hr
+
 Started the hackathon with a bit of research.
 Ideas are forming about what to target in the week... Right now I'm thinking
 that getting the basics of rooms and chat messages to be accessible will be
