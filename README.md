@@ -7,6 +7,14 @@ For those of you that use [Obsidian](https://obsidian.md/), you can open it
 as a vault and get nice links/rendering.
 
 # Day Log
+## 21/10/07
+Time Spent: 2hrs
+
+Swapped over to [SvelteKit](https://kit.svelte.dev/) to get things going with some solid SSR practices and a11y built
+into the linter. Ended up bogged down by an [issue with vite](https://github.com/vitejs/vite/issues/2579) that detracted from building. Very annoying!
+
+In the end I have some basic login functionality working. It'll do for now.
+
 ## 21/10/06
 Time Spent: 1.5hrs
 
