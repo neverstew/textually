@@ -34,6 +34,7 @@
       const { count } = await supabase
         .from('users')
         .select('name', { count: 'exact', head: true })
+        .eq('id', supabase.auth.user().id)
         .neq('name', null)
 
       const params = new URLSearchParams(window.location.search)
