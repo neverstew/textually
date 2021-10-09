@@ -28,7 +28,10 @@
       const { user, refreshToken } = loginResponseBody
       $session.user = user
       $session.refreshToken = refreshToken
-      await goto('/conversations')
+
+      const params = new URLSearchParams(window.location.search)
+      const redirectTo = params.get('redirectTo') || '/conversations'
+      await goto(redirectTo)
     } catch(e) {
       console.error(e)
     } finally {
