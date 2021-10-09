@@ -11,7 +11,7 @@ export const get: RequestHandler = async ({ params }) => {
     password: genPassword(userKey)
   })
 
-  if (!error?.message.includes('Thanks for registering')) {
+  if (!error?.message.match('Thanks for registering')) {
     console.error(error)
     return {
       status: 401,
