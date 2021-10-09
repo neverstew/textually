@@ -56,11 +56,5 @@
 		display: flex;
     flex-direction: column;
 	}
-
-  p {
-    max-width: 100%;
-    word-break: break-all;
-    word-wrap: break-word;
-  }
 </style>
 
