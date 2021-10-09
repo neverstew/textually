@@ -6,7 +6,7 @@
 		if (!session.refreshToken) {
 			return {
 				status: 302,
-				redirect: '/'
+				redirect: '/?redirectTo=/conversations'
 			};
 		}
 

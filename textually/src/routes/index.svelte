@@ -5,6 +5,7 @@
   import fetch from 'cross-fetch';
   import { goto } from '$app/navigation';
   import { session } from '$app/stores';
+  import supabase from '$lib/supabase';
 
   $:loading = true
   $:errorName = null
@@ -29,8 +30,15 @@
       $session.user = user
       $session.refreshToken = refreshToken
 
+      supabase.auth.setSession(refreshToken)
+      const { count } = await supabase
+        .from('users')
+        .select('name', { count: 'exact', head: true })
+        .neq('name', null)
+
       const params = new URLSearchParams(window.location.search)
-      const redirectTo = params.get('redirectTo') || '/conversations'
+      const redirectToDefault = count > 0 ? '/conversations' : '/name'
+      const redirectTo = params.get('redirectTo') || redirectToDefault
       await goto(redirectTo)
     } catch(e) {
       console.error(e)
