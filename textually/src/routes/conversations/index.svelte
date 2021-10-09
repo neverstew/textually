@@ -13,11 +13,21 @@
     supabase.auth.setSession(session.refreshToken)
 
     try {
-      const { data: conversations, error } = await supabase
-        .from('conversation_names')
-        .select('id, name')
+      let { data: conversations, error } = await supabase
+        .from('conversations')
+        .select('id, user_a(id, name), user_b(id, name)')
 
       if (error) console.error(error)
+
+      conversations = conversations.map(c => {
+        const userAId = c.user_a.id
+        const name = (userAId === session.user.id) ? c.user_b.name : c.user_a.name
+
+        return {
+          ...c,
+          name,
+        }
+      })
 
       return {
         props: {
