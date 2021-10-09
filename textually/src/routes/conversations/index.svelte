@@ -40,8 +40,13 @@
 <main>
   <ol>
     {#each conversations as conversation}
-      <li>
-        {conversation.name}
+      <li class="chat-item">
+        <div>
+          <h2>{conversation.name}</h2>
+        </div>
+        <div>
+          <a href={`/conversations/${conversation.id}`}>View</a>
+        </div>
       </li>
     {/each}
   </ol>
@@ -56,5 +61,30 @@
 		display: flex;
     flex-direction: column;
 	}
+
+  .chat-item {
+    border: 1px solid transparent;
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chat-item h2, .chat-item a {
+    font-size: 1.5em;
+  }
+
+  .chat-item a {
+    background-color: #c4c4c4;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    color: black;
+    text-decoration: none;
+  }
+
+  .chat-item:hover {
+    border: 1px solid black;
+  }
 </style>
 
