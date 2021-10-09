@@ -1,37 +1,66 @@
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit';
+  import supabase from '$lib/supabase';
+
 	export const load: Load = async ({ session }) => {
-		if (!session.user) {
+		if (!session.refreshToken) {
 			return {
 				status: 302,
 				redirect: '/'
 			};
 		}
-    return {
-      conversations: []
+
+    supabase.auth.setSession(session.refreshToken)
+
+    try {
+      const { data: conversations, error } = await supabase
+        .from('conversations')
+        .select('id, name')
+
+      if (error) console.error(error)
+
+      return {
+        props: {
+          conversations,
+        }
+      }
+    } catch (e) {
+      console.error(e)
     }
 	};
 </script>
 
 <script lang="ts">
 	import Header from '$lib/Header.svelte';
-import { session } from '$app/stores';
+
+  export let conversations = [];
 </script>
 
 <Header title="Conversations" />
 <main>
-  <pre>
-    {JSON.stringify($session.user)}
-  </pre>
+  <ol>
+    {#each conversations as conversation}
+      <li>
+        {conversation.name}
+      </li>
+    {/each}
+  </ol>
 </main>
 
 <style>
 	main {
+    width: 100%;
     max-width: 900px;
     margin: 0 auto;
 		flex-grow: 1;
 		display: flex;
-		justify-content: center;
+    flex-direction: column;
 	}
+
+  p {
+    max-width: 100%;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
 </style>
 

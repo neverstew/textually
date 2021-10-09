@@ -6,13 +6,33 @@ import { createHash } from "crypto";
 export const get: RequestHandler = async ({ params }) => {
   const { userKey } = params
 
-  const { user, error } = await supabase.auth.signUp({
+  let { user, error, session } = await supabase.auth.signUp({
     email: `${userKey}@example.com`,
     password: genPassword(userKey)
   })
 
+  if (!error?.message.includes('Thanks for registering')) {
+    console.error(error)
+    return {
+      status: 401,
+      body: {
+        name: error.name,
+        message: error.message,
+      }
+    }
+  }
+
+  const signInData = await supabase.auth.signIn({
+    email: `${userKey}@example.com`,
+    password: genPassword(userKey)
+  })
+
+  user = signInData.user
+  session = signInData.session
+  error = signInData.error
   if (error) {
     console.error(error)
+
     return {
       status: 401,
       body: {
@@ -26,6 +46,7 @@ export const get: RequestHandler = async ({ params }) => {
     status: 201,
     body: {
       user: JSON.stringify(user),
+      refreshToken: session.refresh_token,
     },
   }
 }

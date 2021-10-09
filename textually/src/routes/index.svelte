@@ -25,8 +25,9 @@
         errorName = name
         errorMessage = message
       }
-      const { user } = loginResponseBody
+      const { user, refreshToken } = loginResponseBody
       $session.user = user
+      $session.refreshToken = refreshToken
       await goto('/conversations')
     } catch(e) {
       console.error(e)
