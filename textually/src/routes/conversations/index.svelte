@@ -14,7 +14,7 @@
 
     try {
       const { data: conversations, error } = await supabase
-        .from('conversations')
+        .from('conversation_names')
         .select('id, name')
 
       if (error) console.error(error)
