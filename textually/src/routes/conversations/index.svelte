@@ -61,17 +61,19 @@
 			</li>
 		{/each}
 	</ol>
+  <a class="button" href="/conversations/new">New Conversation</a>
 </main>
 
 <style>
 	main {
 		min-width: 320px;
 		max-width: 900px;
-		margin: 0 auto;
+		margin: 0 auto 0.5rem;
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
 		overflow-y: hidden;
+    justify-content: space-between;
 	}
 
 	ol {
@@ -110,5 +112,17 @@
 
 	.chat-item:hover {
 		border: 1px solid black;
+	}
+
+  .button {
+		font-size: 1.5em;
+		padding: 1.5rem;
+		margin: 0 0.125rem;
+		border-radius: 0.5rem;
+    border: 1px solid #c4c4c4;
+		text-decoration: none;
+		color: black;
+		text-align: center;
+    background-color: #c4c4c4;
 	}
 </style>
