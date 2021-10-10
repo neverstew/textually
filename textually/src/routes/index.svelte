@@ -27,14 +27,14 @@
         errorMessage = message
       }
       const { user, refreshToken } = loginResponseBody
-      $session.user = user
+      $session.user = supabase.auth.user()
       $session.refreshToken = refreshToken
 
       supabase.auth.setSession(refreshToken)
       const { count } = await supabase
         .from('users')
         .select('name', { count: 'exact', head: true })
-        .eq('id', supabase.auth.user().id)
+        .eq('id', $session.user.id)
         .neq('name', null)
 
       const params = new URLSearchParams(window.location.search)
