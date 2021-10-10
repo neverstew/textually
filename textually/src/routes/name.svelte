@@ -24,7 +24,7 @@
 		<div>
 			<label for="name">
 				<span>Your name</span>
-				<input type="text" id="name" name="name" autocomplete="name" bind:value={name} />
+				<input type="text" id="name" name="name" autocomplete="name" required bind:value={name} />
 			</label>
 		</div>
 		<button>Submit</button>

@@ -6,7 +6,7 @@
 	<title>{title}</title>
 </svelte:head>
 <header>
-	<h1>{title}</h1>
+	<h1 role="banner">{title}</h1>
 </header>
 
 <style>

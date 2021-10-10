@@ -29,3 +29,6 @@ Small case study with some interesting feedback points directly from people.
 ## Screen Readers
 On MacOS (where I'm developing), the built-in [[VoiceOver]] is the top one.
 NVDA could be a good second for later.
+
+## [Aria Landmarks](https://www.tpgi.com/using-wai-aria-landmarks-2013)
+Nice overview of how landmarks can help navigation and how to choose them.

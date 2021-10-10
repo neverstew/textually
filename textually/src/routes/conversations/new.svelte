@@ -84,8 +84,8 @@
 </script>
 
 <Header title="Find Person" />
-<main>
-	<div class="instructions">
+<main role="main">
+	<div id="instructions">
 		<p>When someone wants to talk to you, they can find you by your nickname.</p>
 		<p>When you want to talk to someone else, you can ask them for their nickname.</p>
 		<label class="nickname" for="nickname" aria-label={`Your nickname is ${user.nickname}`}>
@@ -97,12 +97,12 @@
 	</div>
 	<form action="#" on:submit|preventDefault={handleSubmit}>
 		{#if error}
-			<p class="error" role="alert">Error: Could not find that person. Try again.</p>
+			<p id="error" role="alert">Error: Could not find that person. Try again.</p>
 		{/if}
 		<div>
 			<label for="name">
 				<span>Their name</span>
-				<input type="text" id="name" name="name" bind:value={name} />
+				<input type="text" id="name" name="name" aria-describedby="instructions" bind:value={name} required aria-errormessage="error"/>
 			</label>
 		</div>
 		<button>Start Conversation</button>
@@ -121,14 +121,14 @@
 		justify-content: space-between;
 	}
 
-	.instructions {
+	#instructions {
 		padding: 0.5rem;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
 	}
 
-	.instructions p {
+	#instructions p {
 		margin-bottom: 0.5rem;
 		line-height: 1.2;
 		font-size: 1.125em;
@@ -173,7 +173,7 @@
 		padding: 0.725rem;
 	}
 
-	.error {
+	#error {
 		color: red;
 	}
 </style>

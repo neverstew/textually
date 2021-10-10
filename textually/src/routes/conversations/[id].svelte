@@ -125,7 +125,7 @@
 
 <Header title={conversation.name} />
 <main>
-	<ol bind:this={conversationList}>
+	<ol bind:this={conversationList} role="log" aria-live="polite">
 		{#each messages.chunks as messageChunk}
 			<div class="chat-chunk">
 				<span class="chat-chunk-header" class:chat-chunk-header--self={isSelf(messageChunk)}
