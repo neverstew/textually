@@ -51,7 +51,6 @@
 	import Header from '$lib/Header.svelte';
   import { afterUpdate, onMount } from 'svelte';
   import chunkMessages, { appendToChunkedMessages, ChunkedMessages } from '$lib/chunkMessages';
-import type { definitions } from 'src/types/database';
 
   export let conversation = {
     id: 0,
