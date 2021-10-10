@@ -20,6 +20,8 @@ export interface paths {
           created_at?: parameters["rowFilter.conversations.created_at"];
           user_a?: parameters["rowFilter.conversations.user_a"];
           user_b?: parameters["rowFilter.conversations.user_b"];
+          /** Updated on insert to messages */
+          last_updated_at?: parameters["rowFilter.conversations.last_updated_at"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -74,6 +76,8 @@ export interface paths {
           created_at?: parameters["rowFilter.conversations.created_at"];
           user_a?: parameters["rowFilter.conversations.user_a"];
           user_b?: parameters["rowFilter.conversations.user_b"];
+          /** Updated on insert to messages */
+          last_updated_at?: parameters["rowFilter.conversations.last_updated_at"];
         };
         header: {
           /** Preference */
@@ -92,6 +96,8 @@ export interface paths {
           created_at?: parameters["rowFilter.conversations.created_at"];
           user_a?: parameters["rowFilter.conversations.user_a"];
           user_b?: parameters["rowFilter.conversations.user_b"];
+          /** Updated on insert to messages */
+          last_updated_at?: parameters["rowFilter.conversations.last_updated_at"];
         };
         body: {
           /** conversations */
@@ -306,7 +312,43 @@ export interface paths {
       };
     };
   };
+  "/rpc/conversation_last_updated_at": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            conv_id: number;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/handle_new_user": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/update_convesation_last_updated_at": {
     post: {
       parameters: {
         body: {
@@ -378,6 +420,8 @@ export interface definitions {
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     user_b: string;
+    /** Updated on insert to messages */
+    last_updated_at?: string;
   };
   /** Messages for each conversation */
   messages: {
@@ -441,6 +485,8 @@ export interface parameters {
   "rowFilter.conversations.created_at": string;
   "rowFilter.conversations.user_a": string;
   "rowFilter.conversations.user_b": string;
+  /** Updated on insert to messages */
+  "rowFilter.conversations.last_updated_at": string;
   /** messages */
   "body.messages": definitions["messages"];
   "rowFilter.messages.id": string;
