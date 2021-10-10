@@ -116,15 +116,11 @@
 
   .chat-item {
     border: 1px solid transparent;
-    padding: 1rem 0.5rem;
+    padding: 0.125rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .chat-item:nth-child(even) {
-    background-color: #eeeeee;
   }
 
   .chat-item:hover {
