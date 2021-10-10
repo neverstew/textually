@@ -12,11 +12,11 @@
 		"update-types": "npx openapi-typescript https://qeebigtisenpxdiifawi.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMzUzMDIzOSwiZXhwIjoxOTQ5MTA2MjM5fQ.rCudheKYpaUv775QdPZ7o2jqN3YEA0Ruincw6e3diWs --output src/types/database/index.ts"
 	},
 	"devDependencies": {
+		"@sveltejs/adapter-vercel": "^1.0.0-next.30",
 		"@sveltejs/kit": "next",
 		"@types/uuid": "^8.3.1",
 		"@typescript-eslint/eslint-plugin": "^4.31.1",
 		"@typescript-eslint/parser": "^4.31.1",
-		"crypto": "^1.0.1",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^3.2.1",
