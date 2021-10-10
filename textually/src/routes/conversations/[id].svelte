@@ -133,7 +133,7 @@
 				>
 				{#each messageChunk as message}
 					<li class="chat-item" class:chat-item--self={isSelf(messageChunk)}>
-						<p>{message.content}</p>
+						<p tabindex="0">{message.content}</p>
 					</li>
 				{/each}
 			</div>
