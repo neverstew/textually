@@ -62,7 +62,7 @@
 
 <style>
 	main {
-    width: 100%;
+    min-width: 320px;
     max-width: 900px;
     margin: 0 auto;
 		flex-grow: 1;
@@ -90,6 +90,10 @@
 
   .chat-item h2, .chat-item a {
     font-size: 1.5em;
+  }
+
+  .chat-item h2 {
+    margin-right: 0.5rem;
   }
 
   .chat-item a {
