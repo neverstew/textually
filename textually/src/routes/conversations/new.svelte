@@ -101,7 +101,7 @@
 		{/if}
 		<div>
 			<label for="name">
-				<span>Their name</span>
+				<span>Their nickname</span>
 				<input type="text" id="name" name="name" aria-describedby="instructions" bind:value={name} required aria-errormessage="error"/>
 			</label>
 		</div>
@@ -134,7 +134,7 @@
 		font-size: 1.125em;
 	}
 
-	.nickname {
+	#instructions .nickname {
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
@@ -142,7 +142,7 @@
 		align-items: center;
 	}
 
-	#nickname {
+	#instructions #nickname {
 		font-family: serif;
 		font-size: 1.5em;
 		text-align: center;
