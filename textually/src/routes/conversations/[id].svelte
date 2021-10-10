@@ -3,33 +3,39 @@
   import supabase from '$lib/supabase';
   import conversationName from '$lib/conversationName';
 
-	export const load: Load = async ({ session }) => {
+	export const load: Load = async ({ session, page: { path, params } }) => {
 		if (!session.refreshToken) {
 			return {
 				status: 302,
-				redirect: '/?redirectTo=/conversations'
+				redirect: `/?redirectTo=${path}`
 			};
 		}
 
     supabase.auth.setSession(session.refreshToken)
 
     try {
-      let { data: conversations, error } = await supabase
+      let { data: conversation, error: errorConversation } = await supabase
         .from('conversations')
-        .select('id, user_a(id, name), user_b(id, name)')
+        .select('user_a(id, name), user_b(id, name)')
+        .eq('id', params.id)
+        .maybeSingle()
+
+      if (errorConversation) console.error(errorConversation)
+
+      const resp = await supabase
+        .from('messages')
+        .select('id, content')
+        .eq('conversation_id', params.id)
+        .order('created_at', { ascending: false })
+      console.dir(resp)
+      let { data: messages, error } = resp
 
       if (error) console.error(error)
 
-      conversations = conversations.map(c => {
-        return {
-          ...c,
-          name: conversationName(c, session.user.id),
-        }
-      })
-
       return {
         props: {
-          conversations,
+          messages,
+          name: conversationName(conversation, session.user.id),
         }
       }
     } catch (e) {
@@ -41,20 +47,16 @@
 <script lang="ts">
 	import Header from '$lib/Header.svelte';
 
-  export let conversations = [];
+  export let name = 'Conversation';
+  export let messages = [];
 </script>
 
-<Header title="Conversations" />
+<Header title={name} />
 <main>
   <ol>
-    {#each conversations as conversation}
+    {#each messages as message}
       <li class="chat-item">
-        <div>
-          <h2>{conversation.name}</h2>
-        </div>
-        <div>
-          <a href={`/conversations/${conversation.id}`} aria-label={`View conversation with ${conversation.name}`}>View</a>
-        </div>
+        <p>{message.content}</p>
       </li>
     {/each}
   </ol>
@@ -81,18 +83,6 @@
 
   .chat-item:nth-child(even) {
     background-color: #eeeeee;
-  }
-
-  .chat-item h2, .chat-item a {
-    font-size: 1.5em;
-  }
-
-  .chat-item a {
-    background-color: #c4c4c4;
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.5rem;
-    color: black;
-    text-decoration: none;
   }
 
   .chat-item:hover {
