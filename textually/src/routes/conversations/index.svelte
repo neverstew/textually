@@ -87,7 +87,7 @@
 
   .chat-item a {
     background-color: #c4c4c4;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.75rem;
     border-radius: 0.5rem;
     color: black;
     text-decoration: none;
