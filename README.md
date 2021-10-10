@@ -7,6 +7,19 @@ For those of you that use [Obsidian](https://obsidian.md/), you can open it
 as a vault and get nice links/rendering.
 
 # Day Log
+## 21/10/09
+Time Spent: 3hrs
+
+Finally made it into a groove! A default conversation is created on arrival and the
+basis of messages formulated. As per all the hype, creating with supabase is so easy
+when combining the table/policy/function UIs with the client/API generated in the
+background.
+
+## 21/10/08
+Time Spent: 0
+
+Went to the pub
+
 ## 21/10/07
 Time Spent: 2hrs
 
