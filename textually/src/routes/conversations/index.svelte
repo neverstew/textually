@@ -55,7 +55,7 @@
           <h2>{conversation.name}</h2>
         </div>
         <div>
-          <a href={`/conversations/${conversation.id}`}>View</a>
+          <a href={`/conversations/${conversation.id}`} aria-label={`View conversation with ${conversation.name}`}>View</a>
         </div>
       </li>
     {/each}
@@ -79,6 +79,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .chat-item:nth-child(even) {
+    background-color: #eeeeee;
   }
 
   .chat-item h2, .chat-item a {
