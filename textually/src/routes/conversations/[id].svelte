@@ -24,7 +24,7 @@
 
       const resp = await supabase
         .from('messages')
-        .select('id, content')
+        .select('id, content, user_id')
         .eq('conversation_id', params.id)
         .order('created_at', { ascending: true })
       console.dir(resp)
@@ -34,7 +34,7 @@
 
       return {
         props: {
-          messages,
+          messages: chunkMessages(messages),
           conversation: {
             ...conversation,
             name: conversationName(conversation, session.user.id),
@@ -49,28 +49,50 @@
 
 <script lang="ts">
 	import Header from '$lib/Header.svelte';
-  import { onMount } from 'svelte';
+  import { afterUpdate, onMount } from 'svelte';
+  import chunkMessages, { appendToChunkedMessages, ChunkedMessages } from '$lib/chunkMessages';
+import type { definitions } from 'src/types/database';
 
   export let conversation = {
     id: 0,
     name: 'Conversation',
+    user_a: {
+      id: 'unknown',
+      name: 'You',
+    }, user_b: {
+      id: 'unknown',
+      name: 'Them',
+    }
   };
-  export let messages = [];
-  $:newMessage = '';
+  export let messages: ChunkedMessages = { chunks: [] };
+  let newMessage = '';
+  let conversationList;
 
   onMount(() => {
     const subscription = supabase
       .from('messages')
       .on('INSERT', ({ new: newMessage }) => {
-        messages = [
-          ...messages,
-          newMessage,
-        ]
+        messages = appendToChunkedMessages(messages, newMessage)
       })
       .subscribe()
 
       return () => subscription.unsubscribe()
   })
+
+  afterUpdate(() => {
+    conversationList.scrollTop = conversationList.scrollHeight
+  })
+
+  function isSelf(messageChunk: ChunkedMessages['chunks'][0]) {
+    return supabase.auth.user().id === messageChunk[0].user_id
+  }
+
+  function chunkHeader(messageChunk: ChunkedMessages['chunks'][0]) {
+    if (isSelf(messageChunk)) return 'You'
+
+    const isUserA = conversation.user_a.id === messageChunk[0].user_id
+    return  isUserA ? conversation.user_a.name : conversation.user_b.name
+  }
 
   async function handleNewMessage() {
     if (newMessage === '') return
@@ -103,11 +125,16 @@
 
 <Header title={conversation.name} />
 <main>
-  <ol>
-    {#each messages as message}
-      <li class="chat-item">
-        <p>{message.content}</p>
-      </li>
+  <ol bind:this={conversationList}>
+    {#each messages.chunks as messageChunk}
+    <div class="chat-chunk">
+      <span class="chat-chunk-header" class:chat-chunk-header--self={isSelf(messageChunk)}>{chunkHeader(messageChunk)}</span>
+      {#each messageChunk as message}
+        <li class="chat-item" class:chat-item--self={isSelf(messageChunk)}>
+          <p>{message.content}</p>
+        </li>
+      {/each}
+    </div>
     {/each}
   </ol>
   <form action="#" on:submit|preventDefault={handleNewMessage}>
@@ -139,9 +166,28 @@
 		display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: hidden;
 	}
 
+  ol {
+    overflow-y: auto;
+  }
+
+  .chat-chunk {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-chunk-header {
+    font-size: 1.125em;
+    color: #444444;
+  }
+  .chat-chunk-header--self {
+    align-self: flex-end;
+  }
+
   .chat-item {
+    margin-bottom: 0.5rem;
     border: 1px solid transparent;
     padding: 0.125rem;
     display: flex;
@@ -150,8 +196,17 @@
     align-items: center;
   }
 
+  .chat-item--self {
+    justify-content: flex-end;
+  }
+
   .chat-item:hover {
     border: 1px solid black;
+  }
+
+  p {
+    font-size: 1.5em;
+    line-height: 0.75em;
   }
 
   form {

@@ -68,7 +68,12 @@
 		flex-grow: 1;
 		display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 	}
+
+  ol {
+    overflow-y: auto;
+  }
 
   .chat-item {
     border: 1px solid transparent;
