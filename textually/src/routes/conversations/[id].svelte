@@ -59,7 +59,7 @@
   $:newMessage = '';
 
   onMount(() => {
-    supabase
+    const subscription = supabase
       .from('messages')
       .on('INSERT', ({ new: newMessage }) => {
         messages = [
@@ -68,6 +68,8 @@
         ]
       })
       .subscribe()
+
+      return subscription.unsubscribe
   })
 
   async function handleNewMessage() {
