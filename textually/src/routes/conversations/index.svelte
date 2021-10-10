@@ -17,7 +17,7 @@
 			let { data: conversations, error } = await supabase
 				.from<definitions['conversations']>('conversations')
 				.select('id, user_a(id, name), user_b(id, name), last_updated_at')
-        .order('last_updated_at', { ascending: false });
+				.order('last_updated_at', { ascending: false });
 
 			if (error) console.error(error);
 
@@ -42,29 +42,29 @@
 <script lang="ts">
 	import Header from '$lib/Header.svelte';
 	import { onMount } from 'svelte';
-  import type { definitions } from 'src/types/database';
+	import type { definitions } from 'src/types/database';
 
 	export let conversations: (definitions['conversations'] & { name?: string })[] = [];
 
 	onMount(() => {
-    const subscription = supabase
-      .from<definitions['conversations']>('conversations')
-      .on('INSERT', ({ new: newConversation }) => {
-        const enrichedConversation = {
+		const subscription = supabase
+			.from<definitions['conversations']>('conversations')
+			.on('INSERT', ({ new: newConversation }) => {
+				const enrichedConversation = {
 					...newConversation,
 					name: conversationName(newConversation, supabase.auth.user().id)
-				}
-        conversations.unshift(enrichedConversation)
-      })
-      .subscribe()
-    
-    return () => subscription.unsubscribe()
-  });
+				};
+				conversations.unshift(enrichedConversation);
+			})
+			.subscribe();
 
-  function formatTimestamp(time: string) {
-    const parsed = new Date(time)
-    return `${parsed.toLocaleDateString()} @ ${parsed.toLocaleTimeString()}`
-  }
+		return () => subscription.unsubscribe();
+	});
+
+	function formatTimestamp(time: string) {
+		const parsed = new Date(time);
+		return `${parsed.toLocaleDateString()} @ ${parsed.toLocaleTimeString()}`;
+	}
 </script>
 
 <Header title="Conversations" />
@@ -74,11 +74,13 @@
 			<li class="chat-item">
 				<div>
 					<h2>{conversation.name}</h2>
-          {#if conversation.last_updated_at}
-            <h3 aria-label={`Last message at ${formatTimestamp(conversation.last_updated_at)}`}>{formatTimestamp(conversation.last_updated_at)}</h3>
-          {:else}
-            <h3>New!</h3>
-          {/if}
+					{#if conversation.last_updated_at}
+						<h3 aria-label={`Last message at ${formatTimestamp(conversation.last_updated_at)}`}>
+							{formatTimestamp(conversation.last_updated_at)}
+						</h3>
+					{:else}
+						<h3>New!</h3>
+					{/if}
 				</div>
 				<div>
 					<a
@@ -130,11 +132,11 @@
 		margin-right: 0.5rem;
 	}
 
-  .chat-item h3 {
-    margin-top: 0.135rem;
-    color: #444;
-    font-size: 0.875em;
-  }
+	.chat-item h3 {
+		margin-top: 0.135rem;
+		color: #444;
+		font-size: 0.875em;
+	}
 
 	.chat-item a {
 		background-color: #c4c4c4;
