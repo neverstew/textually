@@ -88,6 +88,15 @@
 
     newMessage = ''
   }
+
+  function handleTextareaEnter(event: KeyboardEvent) {
+    const wasEnterKeyPressed = event.code === 'Enter'
+    const wasShiftPressed = event.shiftKey
+    if (wasEnterKeyPressed && !wasShiftPressed) {
+      event.preventDefault() // prevent extra new line being added
+      handleNewMessage()
+    }
+  }
 </script>
 
 <Header title={conversation.name} />
@@ -108,6 +117,7 @@
           name="newMessage"
           rows="3"
           bind:value={newMessage}
+          on:keypress={handleTextareaEnter}
         />
 			</label>
 		</div>
