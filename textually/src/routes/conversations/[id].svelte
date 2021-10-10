@@ -69,7 +69,7 @@
       })
       .subscribe()
 
-      return subscription.unsubscribe
+      return () => subscription.unsubscribe()
   })
 
   async function handleNewMessage() {
