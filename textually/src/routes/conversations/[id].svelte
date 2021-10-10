@@ -4,14 +4,14 @@
 	import conversationName from '$lib/conversationName';
 
 	export const load: Load = async ({ session, page: { path, params } }) => {
-		if (!session.refreshToken) {
+		if (!session.accessToken) {
 			return {
 				status: 302,
 				redirect: `/?redirectTo=${path}`
 			};
 		}
 
-		supabase.auth.setSession(session.refreshToken);
+		supabase.auth.setAuth(session.accessToken);
 
 		try {
 			let { data: conversation, error: errorConversation } = await supabase

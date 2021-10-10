@@ -46,7 +46,8 @@ export const get: RequestHandler = async ({ params }) => {
 		status: 201,
 		body: {
 			user: JSON.stringify(user),
-			refreshToken: session.refresh_token
+			accessToken: session.access_token,
+			refreshToken: session.refresh_token,
 		}
 	};
 };

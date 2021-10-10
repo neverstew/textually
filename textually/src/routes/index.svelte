@@ -26,19 +26,21 @@
 				errorName = name;
 				errorMessage = message;
 			}
-			const { user, refreshToken } = loginResponseBody;
-			$session.user = supabase.auth.user();
+			const { user, accessToken, refreshToken } = loginResponseBody;
+			supabase.auth.setAuth(accessToken);
+			supabase.auth.setSession(refreshToken);
+			$session.user = JSON.parse(user);
+      $session.accessToken = accessToken;
 			$session.refreshToken = refreshToken;
 
-			supabase.auth.setSession(refreshToken);
-			const { count } = await supabase
+			const { data: userWithNoName } = await supabase
 				.from('users')
-				.select('name', { count: 'exact', head: true })
-				.eq('id', supabase.auth.user().id)
-				.neq('name', null);
+				.select('name')
+				.eq('id', $session.user.id)
+        .single();
 
 			const params = new URLSearchParams(window.location.search);
-			const redirectToDefault = count > 0 ? '/conversations' : '/name';
+			const redirectToDefault = !userWithNoName.name ? '/name' : '/conversations';
 			const redirectTo = params.get('redirectTo') || redirectToDefault;
 			await goto(redirectTo);
 		} catch (e) {

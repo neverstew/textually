@@ -4,14 +4,14 @@
 	import conversationName from '$lib/conversationName';
 
 	export const load: Load = async ({ session }) => {
-		if (!session.refreshToken) {
+		if (!session.accessToken) {
 			return {
 				status: 302,
 				redirect: '/?redirectTo=/conversations'
 			};
 		}
 
-		supabase.auth.setSession(session.refreshToken);
+		supabase.auth.setAuth(session.accessToken);
 
 		try {
 			let { data: conversations, error } = await supabase
@@ -70,6 +70,7 @@
 <Header title="Conversations" />
 <main>
 	<ol>
+    {@debug conversations}
 		{#each conversations as conversation}
 			<li class="chat-item">
 				<div>
