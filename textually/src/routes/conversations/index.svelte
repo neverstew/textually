@@ -40,8 +40,21 @@
 
 <script lang="ts">
 	import Header from '$lib/Header.svelte';
+	import { onMount } from 'svelte';
+  import type { definitions } from 'src/types/database';
 
 	export let conversations = [];
+
+	onMount(() => {
+    const subscription = supabase
+      .from<definitions['conversations']>('conversations')
+      .on('INSERT', ({ new: newConversation }) => {
+        conversations.push(newConversation)
+      })
+      .subscribe()
+    
+    return () => subscription.unsubscribe()
+  });
 </script>
 
 <Header title="Conversations" />
@@ -61,7 +74,7 @@
 			</li>
 		{/each}
 	</ol>
-  <a class="button" href="/conversations/new">New Conversation</a>
+	<a class="button" href="/conversations/new">New Conversation</a>
 </main>
 
 <style>
@@ -73,7 +86,7 @@
 		display: flex;
 		flex-direction: column;
 		overflow-y: hidden;
-    justify-content: space-between;
+		justify-content: space-between;
 	}
 
 	ol {
@@ -114,15 +127,15 @@
 		border: 1px solid black;
 	}
 
-  .button {
+	.button {
 		font-size: 1.5em;
 		padding: 1.5rem;
 		margin: 0 0.125rem;
 		border-radius: 0.5rem;
-    border: 1px solid #c4c4c4;
+		border: 1px solid #c4c4c4;
 		text-decoration: none;
 		color: black;
 		text-align: center;
-    background-color: #c4c4c4;
+		background-color: #c4c4c4;
 	}
 </style>
