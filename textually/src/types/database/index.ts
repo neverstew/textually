@@ -4,435 +4,457 @@
  */
 
 export interface paths {
-	'/': {
-		get: {
-			responses: {
-				/** OK */
-				200: unknown;
-			};
-		};
-	};
-	'/conversations': {
-		get: {
-			parameters: {
-				query: {
-					id?: parameters['rowFilter.conversations.id'];
-					created_at?: parameters['rowFilter.conversations.created_at'];
-					user_a?: parameters['rowFilter.conversations.user_a'];
-					user_b?: parameters['rowFilter.conversations.user_b'];
-					/** Filtering Columns */
-					select?: parameters['select'];
-					/** Ordering */
-					order?: parameters['order'];
-					/** Limiting and Pagination */
-					offset?: parameters['offset'];
-					/** Limiting and Pagination */
-					limit?: parameters['limit'];
-				};
-				header: {
-					/** Limiting and Pagination */
-					Range?: parameters['range'];
-					/** Limiting and Pagination */
-					'Range-Unit'?: parameters['rangeUnit'];
-					/** Preference */
-					Prefer?: parameters['preferCount'];
-				};
-			};
-			responses: {
-				/** OK */
-				200: {
-					schema: definitions['conversations'][];
-				};
-				/** Partial Content */
-				206: unknown;
-			};
-		};
-		post: {
-			parameters: {
-				body: {
-					/** conversations */
-					conversations?: definitions['conversations'];
-				};
-				query: {
-					/** Filtering Columns */
-					select?: parameters['select'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** Created */
-				201: unknown;
-			};
-		};
-		delete: {
-			parameters: {
-				query: {
-					id?: parameters['rowFilter.conversations.id'];
-					created_at?: parameters['rowFilter.conversations.created_at'];
-					user_a?: parameters['rowFilter.conversations.user_a'];
-					user_b?: parameters['rowFilter.conversations.user_b'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** No Content */
-				204: never;
-			};
-		};
-		patch: {
-			parameters: {
-				query: {
-					id?: parameters['rowFilter.conversations.id'];
-					created_at?: parameters['rowFilter.conversations.created_at'];
-					user_a?: parameters['rowFilter.conversations.user_a'];
-					user_b?: parameters['rowFilter.conversations.user_b'];
-				};
-				body: {
-					/** conversations */
-					conversations?: definitions['conversations'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** No Content */
-				204: never;
-			};
-		};
-	};
-	'/messages': {
-		get: {
-			parameters: {
-				query: {
-					id?: parameters['rowFilter.messages.id'];
-					created_at?: parameters['rowFilter.messages.created_at'];
-					conversation_id?: parameters['rowFilter.messages.conversation_id'];
-					user_id?: parameters['rowFilter.messages.user_id'];
-					content?: parameters['rowFilter.messages.content'];
-					/** Filtering Columns */
-					select?: parameters['select'];
-					/** Ordering */
-					order?: parameters['order'];
-					/** Limiting and Pagination */
-					offset?: parameters['offset'];
-					/** Limiting and Pagination */
-					limit?: parameters['limit'];
-				};
-				header: {
-					/** Limiting and Pagination */
-					Range?: parameters['range'];
-					/** Limiting and Pagination */
-					'Range-Unit'?: parameters['rangeUnit'];
-					/** Preference */
-					Prefer?: parameters['preferCount'];
-				};
-			};
-			responses: {
-				/** OK */
-				200: {
-					schema: definitions['messages'][];
-				};
-				/** Partial Content */
-				206: unknown;
-			};
-		};
-		post: {
-			parameters: {
-				body: {
-					/** messages */
-					messages?: definitions['messages'];
-				};
-				query: {
-					/** Filtering Columns */
-					select?: parameters['select'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** Created */
-				201: unknown;
-			};
-		};
-		delete: {
-			parameters: {
-				query: {
-					id?: parameters['rowFilter.messages.id'];
-					created_at?: parameters['rowFilter.messages.created_at'];
-					conversation_id?: parameters['rowFilter.messages.conversation_id'];
-					user_id?: parameters['rowFilter.messages.user_id'];
-					content?: parameters['rowFilter.messages.content'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** No Content */
-				204: never;
-			};
-		};
-		patch: {
-			parameters: {
-				query: {
-					id?: parameters['rowFilter.messages.id'];
-					created_at?: parameters['rowFilter.messages.created_at'];
-					conversation_id?: parameters['rowFilter.messages.conversation_id'];
-					user_id?: parameters['rowFilter.messages.user_id'];
-					content?: parameters['rowFilter.messages.content'];
-				};
-				body: {
-					/** messages */
-					messages?: definitions['messages'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** No Content */
-				204: never;
-			};
-		};
-	};
-	'/users': {
-		get: {
-			parameters: {
-				query: {
-					/** References the internal Supabase Auth user. */
-					id?: parameters['rowFilter.users.id'];
-					/** User's name */
-					name?: parameters['rowFilter.users.name'];
-					/** Filtering Columns */
-					select?: parameters['select'];
-					/** Ordering */
-					order?: parameters['order'];
-					/** Limiting and Pagination */
-					offset?: parameters['offset'];
-					/** Limiting and Pagination */
-					limit?: parameters['limit'];
-				};
-				header: {
-					/** Limiting and Pagination */
-					Range?: parameters['range'];
-					/** Limiting and Pagination */
-					'Range-Unit'?: parameters['rangeUnit'];
-					/** Preference */
-					Prefer?: parameters['preferCount'];
-				};
-			};
-			responses: {
-				/** OK */
-				200: {
-					schema: definitions['users'][];
-				};
-				/** Partial Content */
-				206: unknown;
-			};
-		};
-		post: {
-			parameters: {
-				body: {
-					/** users */
-					users?: definitions['users'];
-				};
-				query: {
-					/** Filtering Columns */
-					select?: parameters['select'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** Created */
-				201: unknown;
-			};
-		};
-		delete: {
-			parameters: {
-				query: {
-					/** References the internal Supabase Auth user. */
-					id?: parameters['rowFilter.users.id'];
-					/** User's name */
-					name?: parameters['rowFilter.users.name'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** No Content */
-				204: never;
-			};
-		};
-		patch: {
-			parameters: {
-				query: {
-					/** References the internal Supabase Auth user. */
-					id?: parameters['rowFilter.users.id'];
-					/** User's name */
-					name?: parameters['rowFilter.users.name'];
-				};
-				body: {
-					/** users */
-					users?: definitions['users'];
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferReturn'];
-				};
-			};
-			responses: {
-				/** No Content */
-				204: never;
-			};
-		};
-	};
-	'/rpc/handle_new_user': {
-		post: {
-			parameters: {
-				body: {
-					args: { [key: string]: unknown };
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferParams'];
-				};
-			};
-			responses: {
-				/** OK */
-				200: unknown;
-			};
-		};
-	};
-	'/rpc/create_default_conversation': {
-		post: {
-			parameters: {
-				body: {
-					args: { [key: string]: unknown };
-				};
-				header: {
-					/** Preference */
-					Prefer?: parameters['preferParams'];
-				};
-			};
-			responses: {
-				/** OK */
-				200: unknown;
-			};
-		};
-	};
+  "/": {
+    get: {
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/conversations": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.conversations.id"];
+          created_at?: parameters["rowFilter.conversations.created_at"];
+          user_a?: parameters["rowFilter.conversations.user_a"];
+          user_b?: parameters["rowFilter.conversations.user_b"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["conversations"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** conversations */
+          conversations?: definitions["conversations"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.conversations.id"];
+          created_at?: parameters["rowFilter.conversations.created_at"];
+          user_a?: parameters["rowFilter.conversations.user_a"];
+          user_b?: parameters["rowFilter.conversations.user_b"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.conversations.id"];
+          created_at?: parameters["rowFilter.conversations.created_at"];
+          user_a?: parameters["rowFilter.conversations.user_a"];
+          user_b?: parameters["rowFilter.conversations.user_b"];
+        };
+        body: {
+          /** conversations */
+          conversations?: definitions["conversations"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/messages": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.messages.id"];
+          created_at?: parameters["rowFilter.messages.created_at"];
+          conversation_id?: parameters["rowFilter.messages.conversation_id"];
+          user_id?: parameters["rowFilter.messages.user_id"];
+          content?: parameters["rowFilter.messages.content"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["messages"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** messages */
+          messages?: definitions["messages"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.messages.id"];
+          created_at?: parameters["rowFilter.messages.created_at"];
+          conversation_id?: parameters["rowFilter.messages.conversation_id"];
+          user_id?: parameters["rowFilter.messages.user_id"];
+          content?: parameters["rowFilter.messages.content"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.messages.id"];
+          created_at?: parameters["rowFilter.messages.created_at"];
+          conversation_id?: parameters["rowFilter.messages.conversation_id"];
+          user_id?: parameters["rowFilter.messages.user_id"];
+          content?: parameters["rowFilter.messages.content"];
+        };
+        body: {
+          /** messages */
+          messages?: definitions["messages"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/users": {
+    get: {
+      parameters: {
+        query: {
+          /** References the internal Supabase Auth user. */
+          id?: parameters["rowFilter.users.id"];
+          /** User's name */
+          name?: parameters["rowFilter.users.name"];
+          nickname?: parameters["rowFilter.users.nickname"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["users"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** users */
+          users?: definitions["users"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          /** References the internal Supabase Auth user. */
+          id?: parameters["rowFilter.users.id"];
+          /** User's name */
+          name?: parameters["rowFilter.users.name"];
+          nickname?: parameters["rowFilter.users.nickname"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          /** References the internal Supabase Auth user. */
+          id?: parameters["rowFilter.users.id"];
+          /** User's name */
+          name?: parameters["rowFilter.users.name"];
+          nickname?: parameters["rowFilter.users.nickname"];
+        };
+        body: {
+          /** users */
+          users?: definitions["users"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/rpc/handle_new_user": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/random_animal_name": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/create_default_conversation": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: unknown };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
 }
 
 export interface definitions {
-	/** Conversations between users */
-	conversations: {
-		/**
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: number;
-		created_at?: string;
-		/**
-		 * Note:
-		 * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-		 */
-		user_a: string;
-		/**
-		 * Note:
-		 * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-		 */
-		user_b: string;
-	};
-	/** Messages for each conversation */
-	messages: {
-		/**
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: number;
-		created_at?: string;
-		/**
-		 * Note:
-		 * This is a Foreign Key to `conversations.id`.<fk table='conversations' column='id'/>
-		 */
-		conversation_id: number;
-		/**
-		 * Note:
-		 * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-		 */
-		user_id: string;
-		content?: string;
-	};
-	/** Profile data for each user. */
-	users: {
-		/**
-		 * References the internal Supabase Auth user.
-		 *
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: string;
-		/** User's name */
-		name?: string;
-	};
+  /** Conversations between users */
+  conversations: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    created_at?: string;
+    /**
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_a: string;
+    /**
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_b: string;
+  };
+  /** Messages for each conversation */
+  messages: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    created_at?: string;
+    /**
+     * Note:
+     * This is a Foreign Key to `conversations.id`.<fk table='conversations' column='id'/>
+     */
+    conversation_id: number;
+    /**
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_id: string;
+    content?: string;
+  };
+  /** Profile data for each user. */
+  users: {
+    /**
+     * References the internal Supabase Auth user.
+     *
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /** User's name */
+    name?: string;
+    nickname: string;
+  };
 }
 
 export interface parameters {
-	/** Preference */
-	preferParams: 'params=single-object';
-	/** Preference */
-	preferReturn: 'return=representation' | 'return=minimal' | 'return=none';
-	/** Preference */
-	preferCount: 'count=none';
-	/** Filtering Columns */
-	select: string;
-	/** On Conflict */
-	on_conflict: string;
-	/** Ordering */
-	order: string;
-	/** Limiting and Pagination */
-	range: string;
-	/** Limiting and Pagination */
-	rangeUnit: string;
-	/** Limiting and Pagination */
-	offset: string;
-	/** Limiting and Pagination */
-	limit: string;
-	/** conversations */
-	'body.conversations': definitions['conversations'];
-	'rowFilter.conversations.id': string;
-	'rowFilter.conversations.created_at': string;
-	'rowFilter.conversations.user_a': string;
-	'rowFilter.conversations.user_b': string;
-	/** messages */
-	'body.messages': definitions['messages'];
-	'rowFilter.messages.id': string;
-	'rowFilter.messages.created_at': string;
-	'rowFilter.messages.conversation_id': string;
-	'rowFilter.messages.user_id': string;
-	'rowFilter.messages.content': string;
-	/** users */
-	'body.users': definitions['users'];
-	/** References the internal Supabase Auth user. */
-	'rowFilter.users.id': string;
-	/** User's name */
-	'rowFilter.users.name': string;
+  /** Preference */
+  preferParams: "params=single-object";
+  /** Preference */
+  preferReturn: "return=representation" | "return=minimal" | "return=none";
+  /** Preference */
+  preferCount: "count=none";
+  /** Filtering Columns */
+  select: string;
+  /** On Conflict */
+  on_conflict: string;
+  /** Ordering */
+  order: string;
+  /** Limiting and Pagination */
+  range: string;
+  /** Limiting and Pagination */
+  rangeUnit: string;
+  /** Limiting and Pagination */
+  offset: string;
+  /** Limiting and Pagination */
+  limit: string;
+  /** conversations */
+  "body.conversations": definitions["conversations"];
+  "rowFilter.conversations.id": string;
+  "rowFilter.conversations.created_at": string;
+  "rowFilter.conversations.user_a": string;
+  "rowFilter.conversations.user_b": string;
+  /** messages */
+  "body.messages": definitions["messages"];
+  "rowFilter.messages.id": string;
+  "rowFilter.messages.created_at": string;
+  "rowFilter.messages.conversation_id": string;
+  "rowFilter.messages.user_id": string;
+  "rowFilter.messages.content": string;
+  /** users */
+  "body.users": definitions["users"];
+  /** References the internal Supabase Auth user. */
+  "rowFilter.users.id": string;
+  /** User's name */
+  "rowFilter.users.name": string;
+  "rowFilter.users.nickname": string;
 }
 
 export interface operations {}
