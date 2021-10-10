@@ -49,6 +49,7 @@
 
 <script lang="ts">
 	import Header from '$lib/Header.svelte';
+  import { onMount } from 'svelte';
 
   export let conversation = {
     id: 0,
@@ -56,6 +57,18 @@
   };
   export let messages = [];
   $:newMessage = '';
+
+  onMount(() => {
+    supabase
+      .from('messages')
+      .on('INSERT', ({ new: newMessage }) => {
+        messages = [
+          ...messages,
+          newMessage,
+        ]
+      })
+      .subscribe()
+  })
 
   async function handleNewMessage() {
     const { error } = await supabase
