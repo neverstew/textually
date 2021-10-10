@@ -1,12 +1,52 @@
-# supabase-accessible-chat
+# textua11y
 
-See the [notes](/notes) directory for a markdown collection of notes as I
+[Try it out](https://textually.vercel.app)
+
+# Hacktoberfest Submission Notes
+## What's the point?
+This was a chance for me to combine two things that I've wanted to have more
+of an in-depth look at for a while now:
+
+1. supabase
+1. a11y in dynamic applications
+
+You can read loads more about my thoughts in the notes.
+
+## Notes
+The [notes](/notes) directory for a markdown collection of notes as I
 go through the hackathon.
 
 For those of you that use [Obsidian](https://obsidian.md/), you can open it
 as a vault and get nice links/rendering.
 
+## Team
+Just me!
+Twitter: @_mlloydw
+
+## How I Used Supabase
+Auth, Data, Realtime, Functions/Triggers engine.
+
+There's a fairly obvious structure to things: users have conversations, conversations have messages. All of those
+things appear in realtime with subscriptions.
+
+I bent the auth engine into shape a bit by forcing authentication per-device. There's some weird bits where I'm
+forcing sign up using a UUID stored in localStorage but having to fit that into the email pattern that supabase enforces. See [index.svelte](textually/src/routes/index.svelte) and [login](textually/src/routes/[userKey].ts) for a peek at it. This was all done in the name of ease of sign up (especially since some/many people don't have
+an email address.)
+
+You can also read more about how I got on in the Day Log below.
+
 # Day Log
+## 21/10/09
+Time Spent: 8hrs
+
+After yesterday's successes, today just kept on giving. It was GREAT building with
+supabase. So fast, so easy.
+
+I wish I could have more time to test the a11y aspects of things. It's really something
+that I'll need other people for. (Please raise an issue if you're reading this and
+have something - knowing what issues people have will really help me learn how to combat
+them in the future!)
+
 ## 21/10/09
 Time Spent: 3hrs
 
@@ -18,7 +58,7 @@ background.
 ## 21/10/08
 Time Spent: 0
 
-Went to the pub
+Went to the pub. No regrets.
 
 ## 21/10/07
 Time Spent: 2hrs
