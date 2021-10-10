@@ -15,8 +15,9 @@
 
 		try {
 			let { data: conversations, error } = await supabase
-				.from('conversations')
-				.select('id, user_a(id, name), user_b(id, name)');
+				.from<definitions['conversations']>('conversations')
+				.select('id, user_a(id, name), user_b(id, name), last_updated_at')
+        .order('last_updated_at', { ascending: false });
 
 			if (error) console.error(error);
 
@@ -43,18 +44,27 @@
 	import { onMount } from 'svelte';
   import type { definitions } from 'src/types/database';
 
-	export let conversations = [];
+	export let conversations: (definitions['conversations'] & { name?: string })[] = [];
 
 	onMount(() => {
     const subscription = supabase
       .from<definitions['conversations']>('conversations')
       .on('INSERT', ({ new: newConversation }) => {
-        conversations.push(newConversation)
+        const enrichedConversation = {
+					...newConversation,
+					name: conversationName(newConversation, supabase.auth.user().id)
+				}
+        conversations.unshift(enrichedConversation)
       })
       .subscribe()
     
     return () => subscription.unsubscribe()
   });
+
+  function formatTimestamp(time: string) {
+    const parsed = new Date(time)
+    return `${parsed.toLocaleDateString()} @ ${parsed.toLocaleTimeString()}`
+  }
 </script>
 
 <Header title="Conversations" />
@@ -64,6 +74,11 @@
 			<li class="chat-item">
 				<div>
 					<h2>{conversation.name}</h2>
+          {#if conversation.last_updated_at}
+            <h3 aria-label={`Last message at ${formatTimestamp(conversation.last_updated_at)}`}>{formatTimestamp(conversation.last_updated_at)}</h3>
+          {:else}
+            <h3>New!</h3>
+          {/if}
 				</div>
 				<div>
 					<a
@@ -114,6 +129,12 @@
 	.chat-item h2 {
 		margin-right: 0.5rem;
 	}
+
+  .chat-item h3 {
+    margin-top: 0.135rem;
+    color: #444;
+    font-size: 0.875em;
+  }
 
 	.chat-item a {
 		background-color: #c4c4c4;
