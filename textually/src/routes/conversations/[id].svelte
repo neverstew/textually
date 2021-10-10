@@ -73,6 +73,8 @@
   })
 
   async function handleNewMessage() {
+    if (newMessage === '') return
+
     const { error } = await supabase
       .from('messages')
       .insert([{
